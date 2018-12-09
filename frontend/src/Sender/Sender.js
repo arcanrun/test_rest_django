@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 
 export default class Sender extends React.Component {
   constructor() {
@@ -16,29 +16,32 @@ export default class Sender extends React.Component {
     console.log(this.state.text);
   }
   send() {
+    const csrftoken = Cookies.get("protection");
+    console.log("----", csrftoken);
     const data = this.state.text;
     const mustSend = {
       title: "FROM FRONTEND",
       text: data
     };
-    console.log(JSON.stringify(mustSend));
+    const sendData = JSON.stringify(mustSend);
+    console.log(sendData);
     if (data.length == 0) {
       mustSend.text = "EMPTY";
     }
-    const url = "http://127.0.0.1:8000/add-post/";
+    const url = "http://localhost:8000/add-post/";
     fetch(url, {
+      credentials: "include",
       method: "POST",
-      credentials: "same-origin",
+      // mode: "same-origin",
       headers: {
-        "X-CSRFToken": Cookie.get("csrftoken"),
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken
       },
-      body: JSON.stringify(mustSend)
+      body: sendData
     }).catch(err => console.log(err));
   }
   render() {
-    console.log("--cookie-->", Cookie.get("csrftoken"));
     return (
       <div className="sender">
         <textarea className="sender__textarea" onChange={this.handleChange} />

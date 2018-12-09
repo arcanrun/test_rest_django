@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import PostList from "./PostList/PostList";
-import Cookie from "js-cookie";
-
+// import Cookies from "js-cookie";
+import cookie from "react-cookie";
 class App extends Component {
-  componentDidMount() {
-    console.log("--cookie-->", Cookie.get());
+  constructor() {
+    super();
+    this.state = {
+      username: cookie.load("")
+    };
   }
+
   render() {
     return <PostList />;
   }

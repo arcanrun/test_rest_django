@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import Sender from "../Sender/Sender";
+import Cookies from "js-cookie";
 
 export default class PostList extends Component {
   constructor() {
@@ -12,7 +13,6 @@ export default class PostList extends Component {
     fetch(url)
       .then(response => response.json())
       .then(res => {
-        console.log("====", res);
         this.setState({
           postsList: res
         });
@@ -21,7 +21,6 @@ export default class PostList extends Component {
   }
   render() {
     const { postsList } = this.state;
-    console.log("---->", postsList);
     return (
       <div className="posts">
         <Sender />
