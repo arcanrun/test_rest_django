@@ -9,7 +9,7 @@ export default class PostList extends Component {
     this.state = { postsList: [] };
   }
   componentDidMount() {
-    let url = "http://127.0.0.1:8000/posts/";
+    let url = "http://localhost:8000/posts/";
     fetch(url)
       .then(response => response.json())
       .then(res => {

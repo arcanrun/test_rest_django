@@ -30,9 +30,17 @@ export default class Sender extends React.Component {
     }
     const url = "http://localhost:8000/add-post/";
     fetch(url, {
-      credentials: "include",
+      /* 
+      Чтобы браузеры могли 
+      отправлять запрос 
+      с учётными данными,
+       добавьте credentials: 'include' в объект init,
+        передаваемый вами в метод fetch():
+        */
+
       method: "POST",
-      // mode: "same-origin",
+      credentials: "include",
+      // mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
